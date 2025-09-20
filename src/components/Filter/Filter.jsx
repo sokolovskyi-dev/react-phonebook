@@ -11,6 +11,7 @@ export const Filter = ({ handleChange, filter }) => {
         onChange={handleChange}
         value={filter}
         autoComplete="off"
+        placeholder="Search contacts"
       />
     </label>
   );
