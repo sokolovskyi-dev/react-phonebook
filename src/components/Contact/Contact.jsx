@@ -6,7 +6,7 @@ export const Contact = ({ id, name, number, deleteContact }) => {
   return (
     <ContactStyled>
       <Name>
-        <MdOutlineContactPhone />
+        <MdOutlineContactPhone className="icon" />
         <span>
           {name}: {number}
         </span>
