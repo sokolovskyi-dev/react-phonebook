@@ -43,6 +43,14 @@ h2 {
   color: #007aff;
 }
 
+@media (max-width: 480px) {
+  .main-icon {
+    top: 25%;
+    width: 70px;
+    height: 70px;
+  }
+}
+
 .icon {
   color: #007aff;
 }
