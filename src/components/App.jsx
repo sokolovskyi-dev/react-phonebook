@@ -1,6 +1,8 @@
 import { nanoid } from 'nanoid';
 import { Component } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
+import { Filter } from './Filter/Filter';
+import { ContactList } from './ContactList/ContactList';
 
 export class App extends Component {
   state = {
@@ -14,6 +16,16 @@ export class App extends Component {
   };
 
   handleSubmit = (name, number) => {
+    const normalizedNewName = name.toLowerCase().trim();
+    const isDuplicate = this.state.contacts.some(
+      ({ name }) => name.toLowerCase().trim() === normalizedNewName
+    );
+
+    if (isDuplicate) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
+
     this.setState(prevState => ({
       contacts: [...prevState.contacts, { id: nanoid(), name, number }],
     }));
@@ -31,36 +43,31 @@ export class App extends Component {
     );
   };
 
+  deleteContact = deleteId => {
+    const newContactList = this.state.contacts.filter(
+      ({ id }) => id !== deleteId
+    );
+    this.setState({
+      contacts: newContactList,
+    });
+  };
+
   render() {
     const filteredContacts = this.getFilteredContacts();
 
     return (
-      <div>
+      <div className="container">
         <h1>Phonebook</h1>
         <ContactForm handleSubmit={this.handleSubmit} />
 
         <h2>Contacts</h2>
 
-        <label>
-          <div>Find contact by name</div>
-          <input
-            type="text"
-            name="filter"
-            onChange={this.handleChange}
-            value={this.state.filter}
-            autoComplete="off"
-          />
-        </label>
+        <Filter handleChange={this.handleChange} filter={this.state.filter} />
 
-        <ul>
-          {filteredContacts.map(({ id, name, number }) => {
-            return (
-              <li key={id}>
-                {name}: {number}
-              </li>
-            );
-          })}
-        </ul>
+        <ContactList
+          filteredContacts={filteredContacts}
+          deleteContact={this.deleteContact}
+        />
       </div>
     );
   }

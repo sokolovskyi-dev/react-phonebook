@@ -1,12 +1,12 @@
 import { Component } from 'react';
-
+import { IoMdContacts } from 'react-icons/io';
+import { Form } from './ContactForm.styled';
 export class ContactForm extends Component {
   state = { name: '', number: '' };
 
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
-    // console.log(e.target.name);
   };
 
   handleSubmit = e => {
@@ -24,7 +24,8 @@ export class ContactForm extends Component {
     // const { name, number } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
+        <IoMdContacts className="main-icon" />
         <label>
           <div>Name</div>
           <input
@@ -54,7 +55,7 @@ export class ContactForm extends Component {
         </label>
 
         <button type="submit">Add contact</button>
-      </form>
+      </Form>
     );
   }
 }
