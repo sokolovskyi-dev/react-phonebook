@@ -1,5 +1,5 @@
 import React from 'react';
-import { FilterInput } from './Filter.styled';
+import { FilterInput } from 'components/Filter/Filter.styled.js';
 
 export const Filter = ({ handleChange, filter }) => {
   return (
